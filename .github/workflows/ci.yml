@@ -37,6 +37,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
+          load: true
           tags: lacrei-devsecops:latest
 
       - name: Executar aplicação
