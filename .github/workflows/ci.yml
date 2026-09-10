@@ -42,6 +42,8 @@ jobs:
 
       - name: Executar aplicação
         run: |
-          docker run -d --name lacrei-app -p 3000:3000 lacrei-devsecops
+          docker run -d --name lacrei-app -p 3000:3000 lacrei-devsecops:latest
           sleep 5
+          docker ps -a
+          docker logs lacrei-app
           curl --fail http://localhost:3000/status
