@@ -37,3 +37,10 @@ jobs:
           context: .
           file: ./Dockerfile
           push: false
+          tags: lacrei-devsecops:latest
+
+      - name: Executar aplicação
+        run: |
+          docker run -d --name lacrei-app -p 3000:3000 lacrei-devsecops
+          sleep 5
+          curl --fail http://localhost:3000/status
