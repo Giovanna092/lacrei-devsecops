@@ -27,3 +27,13 @@ jobs:
 
       - name: Executar testes
         run: npm test
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Construir imagem Docker
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
