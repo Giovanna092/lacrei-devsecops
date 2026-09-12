@@ -54,6 +54,7 @@ jobs:
         run: |
           mkdir -p zap-report
           docker run --network host \
+            --user 0 \
             -v "${{ github.workspace }}/zap-report:/zap/wrk/:rw" \
             ghcr.io/zaproxy/zaproxy:stable \
             zap-baseline.py \
