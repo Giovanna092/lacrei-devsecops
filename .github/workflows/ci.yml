@@ -49,3 +49,21 @@ jobs:
           docker logs lacrei-app
           echo "===== TESTE HTTP ====="
           curl --fail http://localhost:3000/status
+
+      - name: Executar OWASP ZAP
+        run: |
+          mkdir -p zap-report
+          docker run --network host \
+            -v "${{ github.workspace }}/zap-report:/zap/wrk/:rw" \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py \
+            -t http://localhost:3000 \
+            -r zap-report.html \
+            -I
+
+      - name: Publicar relatório do ZAP
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-security-report
+          path: zap-report/zap-report.html
