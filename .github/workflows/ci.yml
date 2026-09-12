@@ -45,5 +45,7 @@ jobs:
           docker run -d --name lacrei-app -p 3000:3000 lacrei-devsecops:latest
           sleep 5
           docker ps -a
+          echo "===== LOGS DA APLICAÇÃO ====="
           docker logs lacrei-app
+          echo "===== TESTE HTTP ====="
           curl --fail http://localhost:3000/status
