@@ -28,3 +28,15 @@ jobs:
 
       - name: Publicar imagem no Docker Hub
         run: docker push giovanna092/lacrei-devsecops:latest
+
+      - name: Deploy na AWS
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ubuntu
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            sudo docker pull giovanna092/lacrei-devsecops:latest
+            sudo docker stop lacrei-app || true
+            sudo docker rm lacrei-app || true
+            sudo docker run -d --name lacrei-app -p 3000:3000 giovanna092/lacrei-devsecops:latest
