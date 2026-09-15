@@ -39,4 +39,4 @@ jobs:
             sudo docker pull giovanna092/lacrei-devsecops:latest
             sudo docker stop lacrei-app || true
             sudo docker rm lacrei-app || true
-            sudo docker run -d --name lacrei-app -p 3000:3000 giovanna092/lacrei-devsecops:latest
+            sudo docker run -d --name lacrei-app --restart unless-stopped -p 3000:3000 giovanna092/lacrei-devsecops:latest
