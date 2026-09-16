@@ -43,7 +43,7 @@ jobs:
       - name: Executar aplicação
         run: |
           docker run -d --name lacrei-app -p 3000:3000 lacrei-devsecops:latest
-          sleep 5
+          sleep 10
           docker ps -a
           echo "===== LOGS DA APLICAÇÃO ====="
           docker logs lacrei-app
