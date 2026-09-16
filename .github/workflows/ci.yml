@@ -56,11 +56,12 @@ jobs:
           docker run --network host \
             --user 0 \
             -v "${{ github.workspace }}/zap-report:/zap/wrk/:rw" \
+            -v "${{ github.workspace }}/zap-rules.conf:/zap/wrk/zap-rules.conf:ro" \
             ghcr.io/zaproxy/zaproxy:stable \
             zap-baseline.py \
             -t http://localhost:3000 \
             -r zap-report.html \
-            -I
+            -c zap-rules.conf
 
       - name: Publicar relatório do ZAP
         if: always()
