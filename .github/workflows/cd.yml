@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Login no Docker Hub
         uses: docker/login-action@v3
@@ -24,10 +26,16 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build da imagem Docker
-        run: docker build -t giovanna092/lacrei-devsecops:latest .
+        run: |
+          docker build \
+            -t giovanna092/lacrei-devsecops:latest \
+            -t giovanna092/lacrei-devsecops:${{ github.event.workflow_run.head_sha }} \
+            .
 
       - name: Publicar imagem no Docker Hub
-        run: docker push giovanna092/lacrei-devsecops:latest
+        run: |
+          docker push giovanna092/lacrei-devsecops:latest
+          docker push giovanna092/lacrei-devsecops:${{ github.event.workflow_run.head_sha }}
 
       - name: Deploy na AWS
         uses: appleboy/ssh-action@v1.2.2
