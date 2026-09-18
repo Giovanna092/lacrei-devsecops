@@ -53,6 +53,7 @@ jobs:
       - name: Executar OWASP ZAP
         run: |
           mkdir -p zap-report
+          chmod 777 zap-report
 
           docker run --network host \
             -u zap \
