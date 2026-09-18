@@ -63,7 +63,8 @@ jobs:
             -t http://localhost:3000 \
             -r zap-report.html \
             -c zap-rules.conf \
-            -I
+            -I \
+            --autooff
 
       - name: Publicar relatório do ZAP
         if: always()
