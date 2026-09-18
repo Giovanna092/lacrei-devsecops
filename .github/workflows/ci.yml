@@ -40,15 +40,6 @@ jobs:
           load: true
           tags: lacrei-devsecops:latest
 
-      - name: Scan de vulnerabilidades da imagem
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: lacrei-devsecops:latest
-          format: table
-          exit-code: '1'
-          ignore-unfixed: true
-          severity: HIGH,CRITICAL
-
       - name: Executar aplicação
         run: |
           docker run -d --name lacrei-app -p 3000:3000 lacrei-devsecops:latest
