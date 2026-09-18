@@ -48,3 +48,7 @@ jobs:
             sudo docker stop lacrei-app || true
             sudo docker rm lacrei-app || true
             sudo docker run -d --name lacrei-app --restart unless-stopped -p 3000:3000 giovanna092/lacrei-devsecops:${{ github.event.workflow_run.head_sha }}
+
+      - name: Health check
+        run: |
+          curl --fail http://${{ secrets.AWS_HOST }}:3000/status
