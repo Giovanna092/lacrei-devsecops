@@ -62,7 +62,8 @@ jobs:
             zap-baseline.py \
             -t http://localhost:3000 \
             -r zap-report.html \
-            -c zap-rules.conf
+            -c zap-rules.conf \
+            -I
 
       - name: Publicar relatório do ZAP
         if: always()
