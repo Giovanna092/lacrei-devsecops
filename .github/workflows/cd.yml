@@ -51,4 +51,5 @@ jobs:
 
       - name: Health check
         run: |
+          sleep 10
           curl --fail http://${{ secrets.AWS_HOST }}:3000/status
